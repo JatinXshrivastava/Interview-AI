@@ -1,5 +1,5 @@
 import { Router } from "express"; 
-import { regiterNewUser } from "../controller/auth.controller";
+import { regiterNewUser , loginUserController } from "../controller/auth.controller";
 
 
 /**
@@ -10,4 +10,4 @@ import { regiterNewUser } from "../controller/auth.controller";
 export const authRouter = Router() 
 
 authRouter.post('/register' , regiterNewUser ) 
-
+authRouter.post('/login' , loginUserController) 
