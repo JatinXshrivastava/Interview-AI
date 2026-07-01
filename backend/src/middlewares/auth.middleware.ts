@@ -27,13 +27,13 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
         return
     }
 
-    const isTokenBlacklisted = await tokenBlackListModel.findOne({token}) ; 
+    const isTokenBlacklisted = await tokenBlackListModel.findOne({ token });
 
-    if(isTokenBlacklisted) {
+    if (isTokenBlacklisted) {
         res.status(401).json({
-            message : "token expired"
+            message: "token expired"
         })
-        return 
+        return
     }
 
     const jwtSecretKey = process.env.JWT_SECRET;
@@ -47,7 +47,7 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
         const decoded = jwt.verify(token, jwtSecretKey) as TokenPayload;
 
         req.username = decoded.username;
-        req.userId = decoded.userId;
+        req.userId = decoded.id 
 
         next();
     } catch (err) {
@@ -55,5 +55,4 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
             message: "Invalid or expired token",
         });
     }
-    next();
 }

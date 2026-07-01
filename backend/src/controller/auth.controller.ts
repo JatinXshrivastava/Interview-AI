@@ -155,3 +155,34 @@ export async function logoutUserController(req: Request, res: Response) {
         messsage: "logout successfull"
     })
 }
+
+/**
+ * @name getMeController 
+ * @description fetches the data of the user  
+ * @access private
+ */ 
+export async function getMeController(req : Request , res : Response) {
+    const userId = req.userId ; 
+
+    if (!userId) {
+        res.status(401).json({
+            message: "Unauthorized"
+        })
+        return
+    }
+
+    const user = await userModel.findById(userId)
+    if(!user) {
+        res.status(400).json({
+            message : "user not found" 
+        })
+        return 
+    }
+    res.status(200).json({
+        user : {
+            id : user._id ,
+            username : user.username , 
+            email : user?.email 
+        }
+    })
+}
