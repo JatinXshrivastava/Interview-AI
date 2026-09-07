@@ -11,7 +11,7 @@ export function FooterSignUp(props: footerSignUpTypes) {
             <button
                 type="button"
                 onClick={props.func}
-                className="cursor-pointer font-semibold text-blue-300 transition hover:text-blue-200 hover:underline"
+                className="cursor-pointer font-semibold text-blue-300 transition hover:text-blue-200 hover:scale-104 active:scale-95"
             >
                 {props.redirectBtn}
             </button>

@@ -4,15 +4,29 @@ import { Input } from "../components/Input";
 import { FooterSignUp } from "../components/FooterSignUp"
 import { Title } from "./Title";
 import { OAuthBlock } from "./OAuthBlock";
+import { useState } from "react"; 
+import { useAuth } from "../hooks/useAuth";
 
 
 export function AuthSide() {
     const navigate = useNavigate();
 
-    const handleSubmit = (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
+    const { loading, handleLogin } = useAuth() 
 
+    const [username, setUsername] = useState("") 
+    const [password, setPassword] = useState("")
+
+
+
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
         // Handle login logic here
+        handleLogin({username , password})
+        navigate("/")
+    }
+
+    if(loading) {
+        return (<main><h1>Loading......</h1></main>)
     }
 
     function signUpPageRedirect() {
@@ -32,8 +46,8 @@ export function AuthSide() {
                 </div>
                 <div className="flex flex-col gap-7  rounded-md bg-blend-darken shadow-2xl bg-gray-800/30 px-14 py-7" >
                     <form className="flex flex-col items-center justify-center gap-5 w-full">
-                        <Input label="Username" type="username" placeholder="Enter Your Username" />
-                        <Input label="Password" type="password" placeholder="Enter Your Password" />
+                        <Input change={(e) => setUsername(e.target.value)} label="Username" type="username" placeholder="Enter Your Username" />
+                        <Input change={(e) => setPassword(e.target.value)} label="Password" type="password" placeholder="Enter Your Password" />
                         <button onClick={handleSubmit} type="submit" className="bg-blue-500 cursor-pointer text-white rounded-md py-2 px-4 mt-4 hover:bg-blue-600 active:scale-90">Login</button>
                     </form>
                 </div>

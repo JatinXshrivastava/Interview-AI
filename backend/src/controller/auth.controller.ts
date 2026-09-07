@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { userModel } from "../models/user.model";
 import { tokenBlackListModel } from "../models/tokenBlakclist.model";
 import { userSchemaZod, loginSchemaZod } from "../zod.schema/user.schema";
+import { authMiddleware } from "../middlewares/auth.middleware";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
@@ -161,7 +162,7 @@ export async function logoutUserController(req: Request, res: Response) {
  * @description fetches the data of the user  
  * @access private
  */ 
-export async function getMeController(req : Request , res : Response) {
+export async function getMeController(req : Request , res : Response , authMiddleware : string ) {
     const userId = req.userId ; 
 
     if (!userId) {
