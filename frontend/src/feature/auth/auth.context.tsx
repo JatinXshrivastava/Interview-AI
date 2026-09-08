@@ -15,10 +15,14 @@ type AuthContextValue = {
 
 export const AuthContext = createContext<AuthContextValue | null>(null);
 
+
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const [user, setUser] = useState<string | null>(null);
-    const [loading, setloading] = useState(false);
+    const [loading, setloading] = useState(true);
+
+    
 
     return (
         <AuthContext.Provider value={{ user, setUser, loading, setloading }} >
