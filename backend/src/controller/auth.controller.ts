@@ -162,7 +162,7 @@ export async function logoutUserController(req: Request, res: Response) {
  * @description fetches the data of the user  
  * @access private
  */ 
-export async function getMeController(req : Request , res : Response , authMiddleware : string ) {
+export async function getMeController(req : Request , res : Response ) {
     const userId = req.userId ; 
 
     if (!userId) {

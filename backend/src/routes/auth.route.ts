@@ -30,4 +30,4 @@ authRouter.get('/logout' , logoutUserController )
  * @description fetches the data of the user 
  * @access private
  */
-authRouter.get('/get-me', authMiddleware, getMeController)
+authRouter.get('/get-me', authMiddleware , getMeController)

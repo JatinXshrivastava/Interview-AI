@@ -6,7 +6,7 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GOOGLE_GENAI_API_KEY
 });
 
-export async function generateInterviewReport({ resume, selfDescription, jobDescription }: { resume: string; selfDescription: string; jobDescription: string }) {
+export async function aiGenerateInterviewReport({ resume, selfDescription, jobDescription }: { resume: string; selfDescription: string; jobDescription: string }) {
 
     const prompt = `Generate an interview report for a candidate based on the following information:
                         Resume: ${resume}
@@ -26,5 +26,5 @@ export async function generateInterviewReport({ resume, selfDescription, jobDesc
         throw new Error("The AI response did not contain text")
     }
 
-    return JSON.stringify(JSON.parse(response.text), null, 2)   
+    return interviewReportSchemaZod.parse(JSON.parse(response.text))
 }

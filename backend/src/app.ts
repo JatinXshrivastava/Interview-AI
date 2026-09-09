@@ -11,6 +11,13 @@ app.use(cors({
     credentials : true 
 }))
 
+import { authRouter } from "./routes/auth.route" ; 
+import { interviewRouter } from "./routes/interview.route" ; 
+
+
+app.use("/api/auth" , authRouter) ;
+app.use("/api/interview" , interviewRouter) ;
+
 
 export default app ; 
 
